@@ -3,6 +3,7 @@ using MG.TaskManager.BLL.Interface;
 using MG.TaskManager.BLL.Validation;
 using MG.TaskManager.DAL.Entity;
 using MG.TaskManager.DAL.Interface;
+using System.Collections.Generic;
 
 namespace MG.TaskManager.BLL.Service
 {
@@ -14,6 +15,11 @@ namespace MG.TaskManager.BLL.Service
         public UserService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _unitOfWork.Users.GetAll();
         }
 
         public void SignUp(User user)

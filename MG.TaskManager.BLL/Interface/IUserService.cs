@@ -1,4 +1,5 @@
 ﻿using MG.TaskManager.DAL.Entity;
+using System.Collections.Generic;
 
 namespace MG.TaskManager.BLL.Interface
 {
@@ -7,7 +8,7 @@ namespace MG.TaskManager.BLL.Interface
         void SignUp(User user);
         User FindById(int id);
         User FindByLogin(string login);
-
+        IEnumerable<User> GetAll();
         bool IsUserExist(int id);
         bool IsUserExistByLogin(string login);
     }

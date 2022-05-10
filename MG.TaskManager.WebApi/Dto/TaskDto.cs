@@ -5,6 +5,8 @@ namespace MG.TaskManager.WebApi.Dto
 {
     public class TaskDto
     {
+        public int TaskId { get; set; }
+
         [Required(ErrorMessage = "TaskName can not be empty")]
         public string TaskName { get; set; }
         public string Description { get; set; }
