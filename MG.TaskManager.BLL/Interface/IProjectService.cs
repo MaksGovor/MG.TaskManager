@@ -2,7 +2,7 @@
 
 namespace MG.TaskManager.BLL.Interface
 {
-    interface IProjectService
+    public interface IProjectService
     {
         void Create(Project project);
         Project FindById(int id);

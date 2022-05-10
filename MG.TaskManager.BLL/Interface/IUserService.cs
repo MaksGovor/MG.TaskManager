@@ -2,7 +2,7 @@
 
 namespace MG.TaskManager.BLL.Interface
 {
-    interface IUserService
+    public interface IUserService
     {
         void SignUp(User user);
         User FindById(int id);

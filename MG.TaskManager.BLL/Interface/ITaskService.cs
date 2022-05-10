@@ -2,7 +2,7 @@
 
 namespace MG.TaskManager.BLL.Interface
 {
-    interface ITaskService
+    public interface ITaskService
     {
         void Create(Task task);
         Task FindById(int id);
