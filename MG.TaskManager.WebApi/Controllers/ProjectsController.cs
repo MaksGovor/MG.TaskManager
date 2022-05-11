@@ -27,19 +27,20 @@ namespace MG.TaskManager.WebApi.Controllers
             _projectService = projectService;
         }
 
-        [ResponseType(typeof(IEnumerable<ProjectResponceDto>))]
+        [ResponseType(typeof(IEnumerable<ProjectResponseDto>))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly returns list of projects")]
         // GET: api/Projects
         public IHttpActionResult Get()
         {
-            IEnumerable<ProjectResponceDto> projects = _projectService
+            IEnumerable<ProjectResponseDto> projects = _projectService
                 .GetAllProjects()
-                .Select(project => mapper.Map<Project, ProjectResponceDto>(project));
+                .ToList()
+                .Select(project => mapper.Map<Project, ProjectResponseDto>(project));
 
             return Ok(projects);
         }
 
-        [ResponseType(typeof(ProjectResponceDto))]
+        [ResponseType(typeof(ProjectResponseDto))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly returns project with id")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "There is no projects with such id")]
         // GET: api/Users/5
@@ -52,13 +53,13 @@ namespace MG.TaskManager.WebApi.Controllers
                 return BadRequest("Project with such id not found");
             }
 
-            ProjectResponceDto projectResponce = mapper.Map<Project, ProjectResponceDto>(project);
+            ProjectResponseDto projectResponce = mapper.Map<Project, ProjectResponseDto>(project);
 
             return Ok(projectResponce);
         }
 
         [SwaggerResponseRemoveDefaults]
-        [ResponseType(typeof(ProjectResponceDto))]
+        [ResponseType(typeof(ProjectResponseDto))]
         [SwaggerResponse(HttpStatusCode.Created, Description = "Sucessfuly creates project")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid input")]
         [SwaggerResponse(HttpStatusCode.InternalServerError, Description = "Internal server error")]
@@ -68,7 +69,7 @@ namespace MG.TaskManager.WebApi.Controllers
             try
             {
                 Project project = mapper.Map<ProjectRequestDto, Project>(projectDto);
-                ProjectResponceDto projectResponce = mapper.Map<Project, ProjectResponceDto>(_projectService.Create(project));
+                ProjectResponseDto projectResponce = mapper.Map<Project, ProjectResponseDto>(_projectService.Create(project));
                 return Request.CreateResponse(HttpStatusCode.Created, projectResponce);
             }
             catch (BusinessLogicException e)
@@ -83,7 +84,7 @@ namespace MG.TaskManager.WebApi.Controllers
         }
 
 
-        [ResponseType(typeof(ProjectResponceDto))]
+        [ResponseType(typeof(ProjectResponseDto))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly updated")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid id")]
         // PUT: api/Projects/5
@@ -92,7 +93,7 @@ namespace MG.TaskManager.WebApi.Controllers
             try
             {
                 Project project = mapper.Map<ProjectRequestDto, Project>(projectDto);
-                ProjectResponceDto projectResponce = mapper.Map<Project, ProjectResponceDto>(_projectService.Update(id, project));
+                ProjectResponseDto projectResponce = mapper.Map<Project, ProjectResponseDto>(_projectService.Update(id, project));
                 return Ok(projectResponce);
             }
             catch (BusinessLogicException e)

@@ -13,13 +13,15 @@ namespace MG.TaskManager.WebApi.App_Start
                 cfg.CreateMap<User, UserResponseDto>();
                 cfg.CreateMap<UserRequestDto, User>();
 
-                cfg.CreateMap<Project, ProjectResponceDto>()
-                    .ForMember("OwnerId", opt => opt.MapFrom(p => p.UserId));
+                cfg.CreateMap<Project, ProjectResponseDto>()
+                    .ForMember("OwnerId", opt => opt.MapFrom(p => p.UserId))
+                    .ForMember("Owner", opt => opt.MapFrom(p => p.User));
                 cfg.CreateMap<ProjectRequestDto, Project>()
                     .ForMember("UserId", opt => opt.MapFrom(p => p.OwnerId));
 
                 cfg.CreateMap<Task, TaskResponseDto>()
-                    .ForMember("ExecutorId", opt => opt.MapFrom(p => p.UserId));
+                    .ForMember("Executor", opt => opt.MapFrom(p => p.User))
+                    .ForMember("Project", opt => opt.MapFrom(p => p.Project));
                 cfg.CreateMap<TaskRequestDto, Task>()
                     .ForMember("UserId", opt => opt.MapFrom(p => p.ExecutorId));
             });
