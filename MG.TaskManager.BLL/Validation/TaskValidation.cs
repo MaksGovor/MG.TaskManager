@@ -36,5 +36,18 @@ namespace MG.TaskManager.BLL.Validation
 
             return validTaskDto;
         }
+
+        public static bool checkTaskDatesByProject(Task task, Project project)
+        {
+            if (project == null)
+            {
+                throw new BusinessLogicException($"Project with id: {task.ProjectId} not exist");
+            }
+
+            return (
+                task.EndDate <= project.EndDate &&
+                task.StartDate >= project.BeginDate
+                );
+        }
     }
 }

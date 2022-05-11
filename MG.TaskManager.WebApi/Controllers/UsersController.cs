@@ -81,7 +81,6 @@ namespace MG.TaskManager.WebApi.Controllers
         [ResponseType(typeof(void))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly deleted")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid id")]
-        [SwaggerResponse(HttpStatusCode.InternalServerError, Description = "Internal server error")]
         // DELETE: api/Users/5
         public IHttpActionResult Delete(int id)
         {
@@ -93,10 +92,6 @@ namespace MG.TaskManager.WebApi.Controllers
             catch (BusinessLogicException e)
             {
                 return NotFound();
-            }
-            catch
-            {
-                return InternalServerError();
             }
         }
     }

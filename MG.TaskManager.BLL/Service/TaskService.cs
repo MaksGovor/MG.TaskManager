@@ -17,15 +17,30 @@ namespace MG.TaskManager.BLL.Service
 
         public IEnumerable<Task> GetAllTasksForProject(int projectId)
         {
+            if (projectId <= 0 || _unitOfWork.Projects.FindById(projectId) == null)
+            {
+                throw new BusinessLogicException($"Project with id: {projectId} not exist");
+            }
+
             return _unitOfWork.Tasks.Find(t => t.ProjectId == projectId);
         }
 
-        public IEnumerable<Task> GetAllTasksForUser(int userId)
+        public IEnumerable<Task> GetAllTasksForUser(int projectId, int userId)
         {
-            return _unitOfWork.Tasks.Find(t => t.ProjectId == userId);
+            if (userId <= 0 || _unitOfWork.Users.FindById(userId) == null)
+            {
+                throw new BusinessLogicException($"User with id: {userId} not exist");
+            }
+
+            if (projectId <= 0 || _unitOfWork.Projects.FindById(projectId) == null)
+            {
+                throw new BusinessLogicException($"Project with id: {projectId} not exist");
+            }
+
+            return _unitOfWork.Tasks.Find(t => t.ProjectId == projectId && t.UserId == userId);
         }
 
-        public void Create(Task task)
+        public Task Create(Task task)
         {
             if (!TaskValidation.checkValidInput(task))
             {
@@ -37,16 +52,20 @@ namespace MG.TaskManager.BLL.Service
                 throw new BusinessLogicException($"User with id: {task.UserId} not exist");
             }
 
-            if (_unitOfWork.Projects.FindById(task.ProjectId) == null)
+            Project project = _unitOfWork.Projects.FindById(task.ProjectId);
+            if (!TaskValidation.checkTaskDatesByProject(task, project))
             {
-                throw new BusinessLogicException($"Project with id: {task.ProjectId} not exist");
+                throw new BusinessLogicException(
+                    $"Task with id {task.TaskId} dates do not belong to the time slot of dates in the project with id {task.ProjectId}");
             }
 
             _unitOfWork.Tasks.Create(task);
             _unitOfWork.Save();
+
+            return task;
         }
 
-        public void Update(int taskId, Task taskFieldsToUpdate)
+        public Task Update(int taskId, Task taskFieldsToUpdate)
         {
             Task task = _unitOfWork.Tasks.FindById(taskId);
             if (task == null)
@@ -60,9 +79,11 @@ namespace MG.TaskManager.BLL.Service
                 throw new BusinessLogicException($"User with id: {validTask.UserId} not exist");
             }
 
-            if (_unitOfWork.Projects.FindById(validTask.ProjectId) == null)
+            Project project = _unitOfWork.Projects.FindById(task.ProjectId);
+            if (!TaskValidation.checkTaskDatesByProject(task, project))
             {
-                throw new BusinessLogicException($"Project with id: {validTask.ProjectId} not exist");
+                throw new BusinessLogicException(
+                    $"Task with id {task.TaskId} dates do not belong to the time slot of dates in the project with id {task.ProjectId}");
             }
 
             task.TaskName = validTask.TaskName;
@@ -76,9 +97,11 @@ namespace MG.TaskManager.BLL.Service
 
             _unitOfWork.Tasks.Update(task);
             _unitOfWork.Save();
+
+            return task;
         }
 
-        public void UpdateStatus(int taskId, Status status)
+        public Task UpdateStatus(int taskId, Status status)
         {
             Task task = _unitOfWork.Tasks.FindById(taskId);
 
@@ -90,6 +113,8 @@ namespace MG.TaskManager.BLL.Service
 
             _unitOfWork.Tasks.Update(task);
             _unitOfWork.Save();
+
+            return task;
         }
 
         public Task FindById(int id)

@@ -9,7 +9,7 @@ namespace MG.TaskManager.BLL.Interface
         Project Create(Project project);
         Project FindById(int id);
         bool IsExistById(int id);
-        void Update(int projectId, Project project);
+        Project Update(int projectId, Project projectFieldsToUpdate);
         void DeleteById(int id);
     }
 }

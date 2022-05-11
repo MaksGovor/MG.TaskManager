@@ -1,13 +1,17 @@
 ﻿using MG.TaskManager.DAL.Entity;
+using System.Collections.Generic;
 
 namespace MG.TaskManager.BLL.Interface
 {
     public interface ITaskService
     {
-        void Create(Task task);
+        IEnumerable<Task> GetAllTasksForProject(int projectId);
+        IEnumerable<Task> GetAllTasksForUser(int projectId, int userId);
+        Task Create(Task task);
         Task FindById(int id);
         bool IsExistById(int id);
-        void Update(int taskId, Task task);
+        Task Update(int taskId, Task task);
+        Task UpdateStatus(int taskId, Status status);
         void DeleteById(int id);
         void DeleteAllByProjectId(int id);
         void DeleteAllByUserId(int id);

@@ -1,17 +1,17 @@
-﻿using AutoMapper;
-using MG.TaskManager.BLL.Interface;
-using MG.TaskManager.BLL.Validation;
-using MG.TaskManager.DAL.Entity;
-using MG.TaskManager.WebApi.App_Start;
-using MG.TaskManager.WebApi.Dto;
-using Swashbuckle.Swagger.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using AutoMapper;
+using MG.TaskManager.BLL.Interface;
+using MG.TaskManager.BLL.Validation;
+using MG.TaskManager.DAL.Entity;
+using MG.TaskManager.WebApi.App_Start;
+using MG.TaskManager.WebApi.Dto;
+using Swashbuckle.Swagger.Annotations;
 
 namespace MG.TaskManager.WebApi.Controllers
 {
@@ -80,16 +80,28 @@ namespace MG.TaskManager.WebApi.Controllers
             }
         }
 
-        // PUT: api/Projects/5
-        public void Put(int id, [FromBody]ProjectRequestDto value)
-        {
 
+        [ResponseType(typeof(ProjectResponceDto))]
+        [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly updated")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid id")]
+        // PUT: api/Projects/5
+        public IHttpActionResult Put(int id, [FromBody]ProjectRequestDto projectDto)
+        {
+            try
+            {
+                Project project = mapper.Map<ProjectRequestDto, Project>(projectDto);
+                ProjectResponceDto projectResponce = mapper.Map<Project, ProjectResponceDto>(_projectService.Update(id, project));
+                return Ok(projectResponce);
+            }
+            catch (BusinessLogicException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [ResponseType(typeof(void))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly deleted")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid id")]
-        [SwaggerResponse(HttpStatusCode.InternalServerError, Description = "Internal server error")]
         // DELETE: api/Projects/5
         public IHttpActionResult Delete(int id)
         {
@@ -100,11 +112,7 @@ namespace MG.TaskManager.WebApi.Controllers
             }
             catch (BusinessLogicException e)
             {
-                return NotFound();
-            }
-            catch
-            {
-                return InternalServerError();
+                return BadRequest(e.Message);
             }
         }
     }

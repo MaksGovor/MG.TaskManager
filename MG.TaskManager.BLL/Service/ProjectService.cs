@@ -52,9 +52,9 @@ namespace MG.TaskManager.BLL.Service
             return FindById(id) != null;
         }
 
-        public void Update(int projectId, Project projectFieldsToUpdate)
+        public Project Update(int projectId, Project projectFieldsToUpdate)
         {
-            if (!IsExistById(projectId))
+            if (projectId <= 0 || !IsExistById(projectId))
             {
                 throw new BusinessLogicException("There is no project with id = " + projectId);
             }
@@ -67,6 +67,8 @@ namespace MG.TaskManager.BLL.Service
 
             _unitOfWork.Projects.Update(project);
             _unitOfWork.Save();
+
+            return project;
         }
 
         public void DeleteById(int id)
