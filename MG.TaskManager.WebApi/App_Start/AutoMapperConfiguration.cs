@@ -14,7 +14,6 @@ namespace MG.TaskManager.WebApi.App_Start
                 cfg.CreateMap<UserRequestDto, User>();
 
                 cfg.CreateMap<Project, ProjectResponseDto>()
-                    .ForMember("OwnerId", opt => opt.MapFrom(p => p.UserId))
                     .ForMember("Owner", opt => opt.MapFrom(p => p.User));
                 cfg.CreateMap<ProjectRequestDto, Project>()
                     .ForMember("UserId", opt => opt.MapFrom(p => p.OwnerId));
