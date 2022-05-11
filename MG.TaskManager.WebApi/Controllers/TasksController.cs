@@ -7,31 +7,31 @@ using System.Web.Http;
 
 namespace MG.TaskManager.WebApi.Controllers
 {
-    public class ValuesController : ApiController
+    public class TasksController : ApiController
     {
-        // GET api/values
+        // GET: api/Tasks
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET: api/Tasks/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
-        public void Post([FromBody] string value)
+        // POST: api/Tasks
+        public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/Tasks/5
+        public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE: api/Tasks/5
         public void Delete(int id)
         {
         }

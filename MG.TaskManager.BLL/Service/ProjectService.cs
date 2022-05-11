@@ -25,11 +25,11 @@ namespace MG.TaskManager.BLL.Service
             return _unitOfWork.Projects.Find(p => p.UserId == userId);
         }
 
-        public void Create(Project project)
+        public Project Create(Project project)
         {
             if (!ProjectValidation.checkValidInput(project))
             {
-                throw new BusinessLogicException("Project fields is not valid");
+                throw new BusinessLogicException("Project fields is not valid, check date fields or userId");
             }
 
             if (_unitOfWork.Users.FindById(project.UserId) == null)
@@ -39,6 +39,7 @@ namespace MG.TaskManager.BLL.Service
 
             _unitOfWork.Projects.Create(project);
             _unitOfWork.Save();
+            return project;
         }
 
         public Project FindById(int id)

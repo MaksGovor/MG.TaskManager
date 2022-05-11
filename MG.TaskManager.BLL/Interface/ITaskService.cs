@@ -9,5 +9,7 @@ namespace MG.TaskManager.BLL.Interface
         bool IsExistById(int id);
         void Update(int taskId, Task task);
         void DeleteById(int id);
+        void DeleteAllByProjectId(int id);
+        void DeleteAllByUserId(int id);
     }
 }

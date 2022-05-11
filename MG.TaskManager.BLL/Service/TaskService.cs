@@ -113,5 +113,27 @@ namespace MG.TaskManager.BLL.Service
             _unitOfWork.Tasks.Delete(id);
             _unitOfWork.Save();
         }
+
+        public void DeleteAllByProjectId(int id)
+        {
+            if (id <= 0 || _unitOfWork.Projects.FindById(id) == null)
+            {
+                throw new BusinessLogicException("There is no project with id = " + id);
+            }
+
+            _unitOfWork.Tasks.DeleteAllByProjectId(id);
+            _unitOfWork.Save();
+        }
+
+        public void DeleteAllByUserId(int id)
+        {
+            if (id <= 0 || _unitOfWork.Users.FindById(id) == null)
+            {
+                throw new BusinessLogicException("There is no user with id = " + id);
+            }
+
+            _unitOfWork.Tasks.DeleteAllByUserId(id);
+            _unitOfWork.Save();
+        }
     }
 }

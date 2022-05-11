@@ -10,12 +10,12 @@ namespace MG.TaskManager.WebApi.App_Start
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, UserDto>();
-                cfg.CreateMap<UserDto, User>();
+                cfg.CreateMap<User, UserResponseDto>();
+                cfg.CreateMap<UserRequestDto, User>();
 
-                cfg.CreateMap<Project, ProjectDto>()
+                cfg.CreateMap<Project, ProjectResponceDto>()
                     .ForMember("OwnerId", opt => opt.MapFrom(p => p.UserId));
-                cfg.CreateMap<ProjectDto, Project>()
+                cfg.CreateMap<ProjectRequestDto, Project>()
                     .ForMember("UserId", opt => opt.MapFrom(p => p.OwnerId));
 
                 cfg.CreateMap<Task, TaskDto>()

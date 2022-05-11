@@ -41,6 +41,16 @@ namespace MG.TaskManager.DAL.Repository
             }
         }
 
+        public void DeleteAllByProjectId(int id) 
+        {
+            _tmContext.Tasks.RemoveRange(_tmContext.Tasks.Where(t => t.ProjectId == id));
+        }
+
+        public void DeleteAllByUserId(int id)
+        {
+            _tmContext.Tasks.RemoveRange(_tmContext.Tasks.Where(t => t.UserId == id));
+        }
+
         public Task FindById(int id)
         {
             return _tmContext.Tasks.Find(id);

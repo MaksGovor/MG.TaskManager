@@ -1,10 +1,12 @@
 ﻿using MG.TaskManager.DAL.Entity;
+using System.Collections.Generic;
 
 namespace MG.TaskManager.BLL.Interface
 {
     public interface IProjectService
     {
-        void Create(Project project);
+        IEnumerable<Project> GetAllProjects();
+        Project Create(Project project);
         Project FindById(int id);
         bool IsExistById(int id);
         void Update(int projectId, Project project);

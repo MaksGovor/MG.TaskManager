@@ -22,7 +22,7 @@ namespace MG.TaskManager.BLL.Service
             return _unitOfWork.Users.GetAll();
         }
 
-        public void SignUp(User user)
+        public User SignUp(User user)
         {
             if (!UserValidation.checkValidInput(user))
             {
@@ -36,6 +36,8 @@ namespace MG.TaskManager.BLL.Service
 
             _unitOfWork.Users.Create(user);
             _unitOfWork.Save();
+
+            return user;
         }
 
         public User FindByLogin(string login)
@@ -60,12 +62,13 @@ namespace MG.TaskManager.BLL.Service
 
         public void DeleteById(int id)
         {
-            if (!IsUserExist(id))
+            if (id <= 0 || !IsUserExist(id))
             {
                 throw new BusinessLogicException("User with such id does not exist. Id: " + id);
             }
 
             _unitOfWork.Users.Delete(id);
+            _unitOfWork.Save();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MG.TaskManager.WebApi.Dto
 {
-    public class UserDto
+    public class UserResponseDto
     {
         public int UserId { get; set; }
 
@@ -11,7 +11,16 @@ namespace MG.TaskManager.WebApi.Dto
         
         [Required(ErrorMessage = "Login can not be empty")]
         public string Login { get; set; }
-        
+    }
+
+    public class UserRequestDto
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Login can not be empty")]
+        public string Login { get; set; }
+
         [Required(ErrorMessage = "PasswordHash can not be empty")]
         public string PasswordHash { get; set; }
     }

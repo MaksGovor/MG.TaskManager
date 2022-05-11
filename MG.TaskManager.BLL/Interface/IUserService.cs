@@ -5,11 +5,11 @@ namespace MG.TaskManager.BLL.Interface
 {
     public interface IUserService
     {
-        void SignUp(User user);
+        User SignUp(User user);
         User FindById(int id);
         User FindByLogin(string login);
         IEnumerable<User> GetAll();
         bool IsUserExist(int id);
-        bool IsUserExistByLogin(string login);
+        void DeleteById(int id);
     }
 }

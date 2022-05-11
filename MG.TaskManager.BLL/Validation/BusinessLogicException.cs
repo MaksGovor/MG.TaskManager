@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace MG.TaskManager.BLL.Validation
 {
     [Serializable]
-    class BusinessLogicException : Exception
+    public class BusinessLogicException : Exception
     {
         public BusinessLogicException() { }
 
