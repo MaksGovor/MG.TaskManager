@@ -28,7 +28,7 @@ namespace MG.TaskManager.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/Tasks/GetAllTasksForProject")]
+        [Route("api/Tasks/AllForProject")]
         [ResponseType(typeof(IEnumerable<TaskResponseDto>))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly returns list of tasks for project")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid projectId")]
@@ -49,7 +49,7 @@ namespace MG.TaskManager.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/Tasks/GetAllTasksForUser")]
+        [Route("api/Tasks/AllForUser")]
         [ResponseType(typeof(IEnumerable<TaskResponseDto>))]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Sucessfuly returns list of tasks for user in project")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid projectId")]
@@ -112,6 +112,8 @@ namespace MG.TaskManager.WebApi.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("api/Tasks/UdateStatus")]
         [ResponseType(typeof(TaskResponseDto))]
         [SwaggerResponse(HttpStatusCode.Created, Description = "Sucessfuly updates task")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Invalid input")]
