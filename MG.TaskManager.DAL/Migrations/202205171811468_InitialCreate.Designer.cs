@@ -13,7 +13,7 @@ namespace MG.TaskManager.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202205091957594_InitialCreate"; }
+            get { return "202205171811468_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,7 +12,7 @@
                 c => new
                     {
                         ProjectId = c.Int(nullable: false, identity: true),
-                        ProjectName = c.String(),
+                        ProjectName = c.String(nullable: false),
                         BeginDate = c.DateTime(),
                         EndDate = c.DateTime(),
                         UserId = c.Int(nullable: false),
@@ -26,7 +26,7 @@
                 c => new
                     {
                         TaskId = c.Int(nullable: false, identity: true),
-                        TaskName = c.String(),
+                        TaskName = c.String(nullable: false),
                         Description = c.String(),
                         Priority = c.Int(nullable: false),
                         Status = c.Int(nullable: false),

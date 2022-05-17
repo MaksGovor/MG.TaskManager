@@ -60,9 +60,9 @@
     <Compile Include="Interface\ITaskRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
-    <Compile Include="Migrations\202205091957594_InitialCreate.cs" />
-    <Compile Include="Migrations\202205091957594_InitialCreate.designer.cs">
-      <DependentUpon>202205091957594_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202205171811468_InitialCreate.cs" />
+    <Compile Include="Migrations\202205171811468_InitialCreate.designer.cs">
+      <DependentUpon>202205171811468_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,8 +76,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205091957594_InitialCreate.resx">
-      <DependentUpon>202205091957594_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202205171811468_InitialCreate.resx">
+      <DependentUpon>202205171811468_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

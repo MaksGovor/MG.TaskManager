@@ -10,9 +10,15 @@ namespace MG.TaskManager.DAL.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int TaskId { get; set; }
+
+        [Required]
         public string TaskName { get; set; }
         public string Description { get; set; }
+        
+        [Required]
         public int Priority { get; set; }
+        
+        [Required]
         public Status Status { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }

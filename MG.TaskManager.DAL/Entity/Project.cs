@@ -10,6 +10,8 @@ namespace MG.TaskManager.DAL.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ProjectId { get; set; }
+
+        [Required]
         public string ProjectName { get; set; }
         public DateTime? BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
