@@ -44,7 +44,7 @@ namespace MG.TaskManager.BLL.Service
         {
             if (!TaskValidation.checkValidInput(task))
             {
-                throw new BusinessLogicException("Task fields is not valid");
+                throw new BusinessLogicException("Task fields is not valid. Check required field types and date sequence");
             }
 
             if (_unitOfWork.Users.FindById((int)task.UserId) == null)
