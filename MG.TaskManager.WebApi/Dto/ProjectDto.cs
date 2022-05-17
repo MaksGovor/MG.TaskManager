@@ -5,6 +5,7 @@ namespace MG.TaskManager.WebApi.Dto
 {
     public class ProjectResponseDto
     {
+        [Required(ErrorMessage = "ProjectId can not be empty")]
         public int ProjectId { get; set; }
 
         [Required(ErrorMessage = "ProjectName can not be empty")]

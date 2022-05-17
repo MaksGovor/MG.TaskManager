@@ -6,6 +6,7 @@ namespace MG.TaskManager.WebApi.Dto
 {
     public class TaskResponseDto
     {
+        [Required(ErrorMessage = "TaskId can not be empty")]
         public int TaskId { get; set; }
 
         [Required(ErrorMessage = "TaskName can not be empty")]
